@@ -1,34 +1,20 @@
 package com.wen.learnandroid.coroutine.backup
 
+import android.util.Log
+import com.wen.learnandroid.coroutine.MainActivity.Companion.TAG
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.concurrent.thread
 
 /**
- * Description: 协程简单用法
+ * Description: 协程代码怎么写
  *
  * @author zengbowen
  */
 class Backup1 {
-
-    /**
-     * 1.协程代码怎么写
-     */
-    fun back1() {
+    fun backup() {
         GlobalScope.launch {
-            println("Coroutines thread name ${Thread.currentThread().name}")
-        }
-    }
-
-    /**
-     * 2.协程的写法更简单吗
-     */
-    fun back2() {
-        GlobalScope.launch {
-            println("Coroutines thread name ${Thread.currentThread().name}")
-        }
-        thread {
-            println("thread name ${Thread.currentThread().name}")
+            Log.d(TAG, "GlobalScope  ${Thread.currentThread().name}")
         }
     }
 }
