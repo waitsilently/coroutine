@@ -19,7 +19,7 @@
 2. 和线程写法对比
 3. 协程的优点：在同一个代码块里进行多次的线程切换
 4. 等待其他任务
-5. 与 Retrofit、LifeCycle、ViewModel、LiveData、Room 结合
+5. 与 Retrofit、Lifecycle、ViewModel、LiveData、Room 结合
 
 ##### 协程泄漏
 
