@@ -55,6 +55,9 @@ class Backup4 {
     /**
      * 两个网络请求 A 和 B
      * 在两者都回来的时候去做操作
+     * 需求：分别执行两次网络请求,然后把结果合并后展示到界面
+     * 理论上：同时发起请求，但使用回调式的开发实际就会写成回调方式
+     * 回调式开发比较困难
      */
     private fun asyncDemo() {
         val retrofit = Retrofit.Builder().baseUrl("https://api.github.com/")
@@ -63,19 +66,15 @@ class Backup4 {
         val api = retrofit.create(Api::class.java)
 
         GlobalScope.launch(Dispatchers.Main) {
-            Log.d(TAG, "start")
             // 并行请求
             val first = async {
-                Log.d(TAG, "first request")
                 api.listReposCoroutine("waitsilently")
             }
             val second = async {
-                Log.d(TAG, "second request")
                 api.listReposCoroutine("waitsilently")
             }
-            Log.d(TAG, "middle")
             val same = first.await()[0].name == second.await()[0].name
-            Log.d(TAG, "end same = $same")
+            Log.d(TAG, "same = $same")
         }
     }
 }
