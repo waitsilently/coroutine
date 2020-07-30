@@ -1,7 +1,7 @@
 package com.wen.learnandroid.coroutine.backup
 
 import android.util.Log
-import com.wen.learnandroid.coroutine.MainActivity.Companion.TAG
+import com.wen.learnandroid.coroutine.TAG
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.concurrent.thread

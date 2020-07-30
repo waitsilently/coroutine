@@ -2,12 +2,12 @@ package com.wen.learnandroid.coroutine.backup
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.wen.learnandroid.coroutine.MainActivity.Companion.TAG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.concurrent.thread
+import com.wen.learnandroid.coroutine.TAG
 
 /**
  * Description: 协程的优点：方便线程的切换
@@ -30,12 +30,20 @@ class Backup3: AppCompatActivity(){
         Log.d(TAG, "ioCode2 ${Thread.currentThread().name}")
     }
 
+    private fun ioCode3() {
+        Log.d(TAG, "ioCode3 ${Thread.currentThread().name}")
+    }
+
     private fun uiCode1() {
         Log.d(TAG, "uiCode1 ${Thread.currentThread().name}")
     }
 
     private fun uiCode2() {
         Log.d(TAG, "uiCode2 ${Thread.currentThread().name}")
+    }
+
+    private fun uiCode3() {
+        Log.d(TAG, "uiCode3 ${Thread.currentThread().name}")
     }
 
     /**
@@ -50,6 +58,12 @@ class Backup3: AppCompatActivity(){
                     ioCode2()
                     runOnUiThread {
                         uiCode2()
+                        thread {
+                            ioCode3()
+                            runOnUiThread {
+                                uiCode3()
+                            }
+                        }
                     }
                 }
             }
@@ -66,6 +80,8 @@ class Backup3: AppCompatActivity(){
             uiCode1()
             ioCode2()
             uiCode2()
+            ioCode3()
+            uiCode3()
         }
     }
 
@@ -78,6 +94,8 @@ class Backup3: AppCompatActivity(){
             uiCode1()
             ioCode2()
             uiCode2()
+            ioCode3()
+            uiCode3()
         }
     }
 }
@@ -87,6 +105,7 @@ class Backup3: AppCompatActivity(){
  * 4.协程实现，子线程和主线程切换
  * suspend 只起标记作用，其本身不能切换线程, 需要在内部调用其他 suspend 函数来真正切换线程
  * 挂起函数只能在协程或者其他挂起函数中被调用
+ * decompile
  */
 class BackupIO {
 
@@ -103,6 +122,14 @@ class BackupIO {
             // 5.模拟耗时操作
 //            Thread.sleep(1000)
             Log.d(TAG, "ioCode2 ${Thread.currentThread().name}")
+        }
+    }
+
+    private suspend fun ioCode3() {
+        withContext(Dispatchers.IO) {
+            // 5.模拟耗时操作
+//            Thread.sleep(1000)
+            Log.d(TAG, "ioCode3 ${Thread.currentThread().name}")
         }
     }
 }

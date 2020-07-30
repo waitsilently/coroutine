@@ -10,6 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.wen.learnandroid.coroutine.TAG
 
 /**
  * Description: Retrofit 支持协程
@@ -28,13 +29,12 @@ class Backup4 {
         val api = retrofit.create(Api::class.java)
         api.listRepos("waitsilently").enqueue(object : Callback<List<Repo>> {
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-                Log.d(MainActivity.TAG, "onFailure: ${t.message}")
+                Log.d(TAG, "onFailure: ${t.message}")
             }
 
             override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
-                Log.d(MainActivity.TAG, "onResponse ${response.body()?.get(0)?.name}")
+                Log.d(TAG, "onResponse ${response.body()?.get(0)?.name}")
             }
-
         })
     }
 
@@ -48,7 +48,7 @@ class Backup4 {
         val api = retrofit.create(Api::class.java)
         GlobalScope.launch(Dispatchers.Main) {
             val repos = api.listReposCoroutine("waitsilently")
-            Log.d(MainActivity.TAG, "onResponse ${repos[0].name}")
+            Log.d(TAG, "onResponse ${repos[0].name}")
         }
     }
 
