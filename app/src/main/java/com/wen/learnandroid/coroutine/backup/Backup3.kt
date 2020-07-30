@@ -92,12 +92,16 @@ class BackupIO {
 
     private suspend fun ioCode1() {
         withContext(Dispatchers.IO) {
+            // 5.模拟耗时操作
+//            Thread.sleep(1000)
             Log.d(TAG, "ioCode1 ${Thread.currentThread().name}")
         }
     }
 
     private suspend fun ioCode2() {
         withContext(Dispatchers.IO) {
+            // 5.模拟耗时操作
+//            Thread.sleep(1000)
             Log.d(TAG, "ioCode2 ${Thread.currentThread().name}")
         }
     }

@@ -10,6 +10,7 @@ open class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // 主线程名字
         Log.d(TAG, "Main ${Thread.currentThread().name}")
+
     }
 
     companion object {
