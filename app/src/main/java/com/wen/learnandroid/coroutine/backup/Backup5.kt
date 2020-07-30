@@ -1,8 +1,6 @@
 package com.wen.learnandroid.coroutine.backup
 
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * Description: 协程泄漏
@@ -14,8 +12,24 @@ class Backup5 {
 
     fun backup () {
         scope.launch{
-
+            a()
+            b()
+            c()
         }
+    }
+
+    private suspend fun a() {
+        delay(1000)
+    }
+
+    private suspend fun b() {
+        withContext(Dispatchers.IO) {
+            Thread.sleep(1000)
+        }
+    }
+
+    private fun c() {
+
     }
 
     fun onDestroy() {

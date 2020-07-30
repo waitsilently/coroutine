@@ -63,14 +63,19 @@ class Backup4 {
         val api = retrofit.create(Api::class.java)
 
         GlobalScope.launch(Dispatchers.Main) {
+            Log.d(TAG, "start")
             // 并行请求
             val first = async {
+                Log.d(TAG, "first request")
                 api.listReposCoroutine("waitsilently")
             }
             val second = async {
+                Log.d(TAG, "second request")
                 api.listReposCoroutine("waitsilently")
             }
+            Log.d(TAG, "middle")
             val same = first.await()[0].name == second.await()[0].name
+            Log.d(TAG, "end same = $same")
         }
     }
 }
