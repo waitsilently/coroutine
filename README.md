@@ -22,6 +22,7 @@
 5. 与 Retrofit、Lifecycle、ViewModel、LiveData、Room 结合
 
 ##### 协程泄漏
+本质是线程泄漏，也就是内存泄漏。
 
 ##### delay() 和 Thread.sleep()
 delay 其实是切了一个线程做计时。
